@@ -45,7 +45,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
         >
           <tbody>
             <tr>
-              <td>BlOGS ID</td>
+              <td>BLOGS ID</td>
               <td>{user.id}</td>
             </tr>
             <tr>
@@ -64,7 +64,7 @@ const ViewUserProfile = ({ user, updateProfileClick }) => {
               <td>ROLE</td>
               <td>
                 {user.roles.map((role) => {
-                  return <div key={role.id}>{role.name}</div>;
+                  return <div key={role.id}>{role.roleName}</div>;
                 })}
               </td>
             </tr>

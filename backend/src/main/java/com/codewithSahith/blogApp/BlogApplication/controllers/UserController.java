@@ -1,5 +1,6 @@
 package com.codewithSahith.blogApp.BlogApplication.controllers;
 
+import com.codewithSahith.blogApp.BlogApplication.dtos.UpdateUserDto;
 import com.codewithSahith.blogApp.BlogApplication.dtos.UserDto;
 import com.codewithSahith.blogApp.BlogApplication.services.UserService;
 import com.codewithSahith.blogApp.BlogApplication.utils.ApiResponse;
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto,@PathVariable("id") Integer userId) {
-        UserDto updateUser=this.userService.updateUser(userDto,userId);
+    public ResponseEntity<UpdateUserDto> updateUser(@Valid @RequestBody UpdateUserDto userDto, @PathVariable("id") Integer userId) {
+        UpdateUserDto updateUser=this.userService.updateUser(userDto,userId);
         return new ResponseEntity<>(updateUser,HttpStatus.OK);
     }
 

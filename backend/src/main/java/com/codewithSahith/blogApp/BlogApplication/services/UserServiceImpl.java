@@ -1,5 +1,6 @@
 package com.codewithSahith.blogApp.BlogApplication.services;
 
+import com.codewithSahith.blogApp.BlogApplication.dtos.UpdateUserDto;
 import com.codewithSahith.blogApp.BlogApplication.dtos.UserDto;
 import com.codewithSahith.blogApp.BlogApplication.exceptions.RecordNotFoundException;
 import com.codewithSahith.blogApp.BlogApplication.models.Role;
@@ -66,14 +67,13 @@ public class UserServiceImpl  implements UserService{
     }
 
     @Override
-    public UserDto updateUser(UserDto userDto, Integer id) {
+    public UpdateUserDto updateUser(UpdateUserDto userDto, Integer id) {
         User user=this.userRepositary.findById(id).orElseThrow(() ->new RecordNotFoundException("Record not founded with" + id));
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
         user.setAbout(userDto.getAbout());
         User savedUser=this.userRepositary.save(user);
-        return Converter.convertToDTO(savedUser, UserDto.class);
+        return Converter.convertToDTO(savedUser, UpdateUserDto.class);
     }
 
     @Override

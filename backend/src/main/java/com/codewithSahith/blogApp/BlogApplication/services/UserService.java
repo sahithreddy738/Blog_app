@@ -1,5 +1,6 @@
 package com.codewithSahith.blogApp.BlogApplication.services;
 
+import com.codewithSahith.blogApp.BlogApplication.dtos.UpdateUserDto;
 import com.codewithSahith.blogApp.BlogApplication.dtos.UserDto;
 import com.codewithSahith.blogApp.BlogApplication.models.User;
 
@@ -11,7 +12,7 @@ public interface UserService {
     UserDto getUserById(Integer id);
     List<UserDto> getAllUsers();
 
-    UserDto updateUser(UserDto userDto,Integer id);
+    UpdateUserDto updateUser(UpdateUserDto userDto, Integer id);
 
     void deleteUser(Integer id);
 
