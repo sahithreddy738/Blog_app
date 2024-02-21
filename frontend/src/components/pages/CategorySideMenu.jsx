@@ -19,13 +19,13 @@ const CategorySideMenu = () => {
   return (
     <div>
       <ListGroup>
-        <ListGroupItem action={true} tag={Link} to="/" className="border-0">
+        <ListGroupItem action={true} tag={Link} to="/" className="border-2">
           All Blogs
         </ListGroupItem>
         {categories &&
           categories.map((category) => (
             <ListGroupItem
-              className="border-0 mt-2"
+              className="border-2"
               onClick={() => {
                 navigate(`/category/${category.id}`);
               }}

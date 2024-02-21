@@ -12,9 +12,10 @@ import {
   Table,
 } from "reactstrap";
 import ViewUserProfile from "../ViewUserProfile";
-import { getUser } from "../../services/user-service";
+import { getUser, userUpdate } from "../../services/user-service";
 import { useEffect, useState } from "react";
 import { USER_PROFILE } from "../../utils/constants";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   // const object = useContext(userContext);
@@ -35,9 +36,6 @@ const ProfilePage = () => {
   const showUpdateProfile = () => {
     toggleUpdateFlag(true);
   };
-  const viewUpdateProflie = () => {
-    toggleUpdateFlag(false);
-  };
   /*  view user profile */
   const userView = () => {
     return (
@@ -48,7 +46,23 @@ const ProfilePage = () => {
   const viewUserProfile = () => {
     return <div>{user ? userView() : "Loading user Data..."}</div>;
   };
-
+  const handleChange=(e) =>{
+    setUser((prevUser)=>({
+      ...prevUser,
+      [e.target.name]:e.target.value
+    }));
+    console.log(user);
+}
+const updateUser=()=>{
+  userUpdate(user,user.id).then((data)=>{
+   console.log(data);
+   toast.success("update success");
+  })
+  .catch((error)=>{
+   console.log(error);
+  })
+  toggleUpdateFlag(false);
+}
   const updateUserProfile = () => {
     return (
       <div>
@@ -83,7 +97,7 @@ const ProfilePage = () => {
                 <tr>
                   <td>USER NAME</td>
                   <td>
-                    <Input type="text" value={user.name} />
+                    <Input type="text" value={user.name} name="name" onChange={(e)=>handleChange(e)}/>
                   </td>
                 </tr>
                 <tr>
@@ -93,14 +107,14 @@ const ProfilePage = () => {
                 <tr>
                   <td>ABOUT</td>
                   <td>
-                    <Input type="textarea" value={user.about} />
+                    <Input type="textarea" value={user.about} name="about" onChange={(e)=>handleChange(e)}/>
                   </td>
                 </tr>
                 <tr>
                   <td>ROLE</td>
                   <td>
                     {user.roles.map((role) => {
-                      return <div key={role.id}>{role.name}</div>;
+                      return <div key={role.id}>{role.roleName}</div>;
                     })}
                   </td>
                 </tr>
@@ -108,7 +122,7 @@ const ProfilePage = () => {
             </Table>
           </CardBody>
           <CardFooter className="text-center">
-            <Button color="success">Update Profile</Button>
+            <Button color="success" onClick={updateUser}>Update Profile</Button>
           </CardFooter>
         </Card>
       </div>
@@ -128,7 +142,8 @@ const ProfilePage = () => {
       <Button
         onClick={() => navigate("/user/myposts")}
         color="primary"
-        className="text-center"
+        className="m-10"
+        style={{marginLeft:"43em",marginTop:".5em"}}
       >
         My Posts
       </Button>

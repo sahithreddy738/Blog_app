@@ -1,4 +1,4 @@
-import { API } from "."
+import { API, SECURE_API } from "."
 
 export const registerUser= async (user) =>{
     try {
@@ -26,3 +26,12 @@ export const getUser= async(userId) =>{
         throw error;
     }
 }
+
+export const userUpdate = async (user, userId) => {
+    try {
+      const response = await SECURE_API.put(`api/users/${userId}`, user);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
